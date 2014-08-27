@@ -6,10 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node":"0.10.x",
+    "npm":"2.0.x"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.6.5",
     "express": "^4.8.5",
-    "jade": "^1.5.0"
+    "jade": "^1.5.0",
+    "mongoose": "^3.8.15",
+    "morgan": "^1.2.3",
+    "stylus": "^0.48.1"
   }
 }
