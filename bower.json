@@ -19,6 +19,7 @@
     "angular": "https://github.com/angular/bower-angular.git#~1.2.23",
     "angular-resource": "https://github.com/angular/bower-angular-resource.git#~1.2.23",
     "angular-route": "https://github.com/angular/bower-angular-route.git#~1.2.23",
-    "bootstrap": "https://github.com/twbs/bootstrap.git#~3.2.0"
+    "bootstrap": "https://github.com/twbs/bootstrap.git#~3.2.0",
+    "angular-mocks": "https://github.com/angular/bower-angular-mocks.git#~1.2.23"
   }
 }
