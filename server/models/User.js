@@ -4,7 +4,7 @@ var mongoose	= require('mongoose'),
 var userSchema = mongoose.Schema({
 	firstName: {type:String, required:'{PATH} is required'},
 	lastName: {type:String, required:'{PATH} is required'},
-	userName: {
+	username: {
 		type: String,
 		required: '{PATH} is required',
 		unique:true
@@ -16,6 +16,9 @@ var userSchema = mongoose.Schema({
 userSchema.methods = {
 	authenticate: function(passwordToMatch) {
 		return encrypt.hashPwd(this.salt, passwordToMatch) == this.hashed_pwd;
+	},
+	hasRole: function(role) {
+		return this.roles.indexOf(role) > -1;
 	}
 }
 var User = mongoose.model('User', userSchema);
@@ -26,13 +29,17 @@ function createDefaultUsers() {
 			var salt, hash;
 			salt = encrypt.createSalt();
 			hash = encrypt.hashPwd(salt, 'joe');
-			User.create({firstName:'Joe', lastName:'Eames', userName:'joe', salt: salt, hashed_pwd: hash, roles: ['admin']});
+			User.create({firstName:'Joe', lastName:'Eames', username:'joe', salt: salt, hashed_pwd: hash, roles: ['admin']});
 			salt = encrypt.createSalt();
 			hash = encrypt.hashPwd(salt, 'john');
-			User.create({firstName:'John', lastName:'Papa', userName:'john', salt: salt, hashed_pwd: hash, roles: []});
+			User.create({firstName:'John', lastName:'Papa', username:'john', salt: salt, hashed_pwd: hash, roles: []}, function(err) {
+				if(err) {
+					console.log('Cant add John because: ' + err)
+				}
+			});
 			salt = encrypt.createSalt();
 			hash = encrypt.hashPwd(salt, 'dan');
-			User.create({firstName:'Dan', lastName:'Wahlin', userName:'dan', salt: salt, hashed_pwd: hash});
+			User.create({firstName:'Dan', lastName:'Wahlin', username:'dan', salt: salt, hashed_pwd: hash});
 		}
 	})
 };
